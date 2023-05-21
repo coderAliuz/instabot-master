@@ -24,7 +24,7 @@ def register_all_handlers(dp):
     register_admin(dp)
     register_add_user(dp)
     register_follower(dp)
-
+    register_user(dp)
 async def main():
     logging.basicConfig(
         level=logging.INFO,

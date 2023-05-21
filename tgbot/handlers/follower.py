@@ -20,21 +20,29 @@ async def get_name(message: Message):
         await message.reply("Obunachilarni olish boshlandi.\nBu jarayonda bot faoliyati to'xtatiladi.\nJarayon tugagach botdan foydalanish mumkin!!!",reply_markup=ReplyKeyboardRemove())
         username=user[0]
         parol=user[1]
-        followers_list
         await followerState.other.set()
         followers=followers_list(username, parol, name)
         if followers:
             await message.answer(f"{name} obunachilari ro'yxati shakllantirildi")
+            await message.answer("🔘 <b>Kerakli tugmani tanlang</b> ⤵️",reply_markup=home_kb)
+            await homeState.home.set()
         else:
-            await message.answer("Instagram bilan ulanishda xatolik!!!")
+            await message.answer("Instagram bilan ulanishda xatolik!!!",reply_markup=back_kb)
         await followerState.name.set()    
     else:
         await message.reply("Asosiy hisob o'rnatilmagan.")
+        await message.answer("🔘 <b>Kerakli tugmani tanlang</b> ⤵️",reply_markup=home_kb)
+        await homeState.home.set()
 
 async def following_home(message: Message):
     await followerState.other.set()
     await message.reply("Obuna bo'lish boshlandi.\nBu jarayonda bot faoliyati to'xtatiladi.\nJarayon tugagach botdan foydalanish mumkin!!!",reply_markup=ReplyKeyboardRemove())
-    if following_lists():
+    user=main_user()
+    username=user[0]
+    parol=user[1]
+    await followerState.other.set()
+    following=following_lists(username, parol)
+    if following:
         await message.answer("Barcha obunachilarga obuna bo'lindi!!!")
     else:
         await message.answer("Instagram bilan ulanishda xatolik!!!")
